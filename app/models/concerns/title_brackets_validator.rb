@@ -1,30 +1,31 @@
 class TitleBracketsValidator < ActiveModel::Validator
   def validate(record)
     if contains_empty_brackets?(record.title)
-      record.errors.add :title, 'Title contains empty brackets'
+      record.errors.add :title, ' contains empty brackets'
     elsif incorrect_brackets?(record.title)
-      record.errors.add :title, 'Title contains empty brackets'
+      record.errors.add :title,
+      ' contains incorrectly opened or closed brackets'
     end
   end
 
 private
 
-  #checks if there are empty brackets (including brackets with only spaces)
+  #Returns true if title contains empty brackets (incl. brackets with spaces)
   def contains_empty_brackets?(str)
     %w( {} () [] ).any? { |x| str.gsub(" ","").include? x }
   end
 
-  #Checks for incorrect brackets
+  #Returns true if string contains not opened or not closed brackets
   def incorrect_brackets?(str)
     # get only brackets string
-    str.gsub!(/[^(){}\[\]]/, "")
+    brackets = str.gsub(/[^(){}\[\]]/, "")
 
-    # get rid of correct brackets until stack is nil or return true otherwise
-    while str.length > 0 do
-      if %w( {} () [] ).any? { |x| str.include? (x)}
-        str.gsub!("()","")
-        str.gsub!("{}","")
-        str.gsub!("[]","")
+    # get rid of correct brackets until brackets string is empty
+    while brackets.length > 0 do
+      if %w( {} () [] ).any? { |x| brackets.include? (x)}
+        brackets.gsub!("()","")
+        brackets.gsub!("{}","")
+        brackets.gsub!("[]","")
       else
         return true
       end

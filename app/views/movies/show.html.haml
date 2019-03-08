@@ -5,4 +5,6 @@
   %p= link_to 'Email me details about this movie', send_info_movie_path(@movie), class: 'btn btn-sm btn-default'
 .well
   %h1 Comments
+= render "comments/form"
+.well
   = render @comments

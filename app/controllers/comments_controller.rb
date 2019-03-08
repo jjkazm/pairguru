@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
   def create
     @movie = Movie.find(params[:movie_id])
     @comment = @movie.comments.new(comment_params)
+    @comment.user = current_user
     if @comment.save
       flash[:notice] = "Comment has been added"
       redirect_to movie_path(@movie)

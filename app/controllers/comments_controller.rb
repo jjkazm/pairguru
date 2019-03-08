@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
     @movie = Movie.find(params[:movie_id])
     @comment = @movie.comments.new(comment_params)
     if @comment.save
-      flash[:success] = "Comment has been added"
+      flash[:notice] = "Comment has been added"
       redirect_to movie_path(@movie)
     else
       flash[:danger] = "#{@comment.errors.full_messages.first}"

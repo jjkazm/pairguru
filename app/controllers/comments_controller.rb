@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
-
+  before_action :set_movie
   def create
-    @movie = Movie.find(params[:movie_id])
     @comment = @movie.comments.new(comment_params)
     @comment.user = current_user
     if @comment.save
@@ -13,13 +12,24 @@ class CommentsController < ApplicationController
         format.js
       end
     else
-      flash[:danger] = "#{@comment.errors.full_messages.first}"
+      flash[:danger] = "Comment has NOT been added"
       redirect_to movie_path(@movie)
     end
   end
 
+  def destroy
+    @comment = Comment.find(params[:id])
+    @comment.destroy
+    flash[:success] = "Comment has been deleted"
+    redirect_to movie_path(@movie)
+
+  end
   private
     def comment_params
       params.require(:comment).permit(:body)
+    end
+
+    def set_movie
+      @movie = Movie.find(params[:movie_id])
     end
 end

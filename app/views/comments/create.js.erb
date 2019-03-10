@@ -1,2 +1,3 @@
 $('#comments').prepend("<%= escape_javascript(render partial: 'comments/comment', locals: {comment: @comment}) %>");
+$('#add_comment').empty().append("<%= escape_javascript(add_comment) %>")
 $("textarea#comment_body").val('')

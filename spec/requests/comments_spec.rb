@@ -24,7 +24,7 @@ describe "Comments requests", type: :request do
       it "fails creating article" do
         create(:comment, user: @adam)
         expect { subject }.not_to change { Comment.count }
-        expect( Comment.count ).to eq 0
+        expect( Comment.count ).to eq 1
       end
     end
 

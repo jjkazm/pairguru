@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
   def create
     @comment = @movie.comments.new(comment_params)
     @comment.user = current_user
+    authorize @comment
     if @comment.save
       respond_to do |format|
         format.html do
@@ -19,6 +20,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
+    authorize @comment
     @comment.destroy
     flash[:success] = "Comment has been deleted"
     redirect_to movie_path(@movie)

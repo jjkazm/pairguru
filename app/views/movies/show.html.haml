@@ -5,14 +5,8 @@
   %p= link_to 'Email me details about this movie', send_info_movie_path(@movie), class: 'btn btn-sm btn-default'
 .well
   %h1 Comments
-= render "comments/form"
-- if current_user
-  %p
-    You have commented on the #{@movie.title}. Have you changed your mind? Delete
-    your previous comment so you can add new opinion.
-  = link_to "Delete my comment", movie_comment_path(@movie, @comment),
-    method: :delete, class: "btn - btn-danger",
-    data: { confirmation: "Are you sure?"}
+#add_comment
+  = add_comment
 
 .well#comments
   = render @comments

@@ -16,4 +16,6 @@ class Comment < ApplicationRecord
 
   validates :body, presence: true
   validates :body, length: {maximum: 250, minimum: 5}
+  validates :user_id, uniqueness: { scope: :movie_id,
+              message: " can comment only once per movie"}
 end

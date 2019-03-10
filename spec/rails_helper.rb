@@ -36,6 +36,7 @@ RSpec.configure do |config|
   config.include Capybara::DSL
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
+  config.include Devise::Test::ControllerHelpers, type: :helper
   config.include Devise::Test::IntegrationHelpers, type: :feature
   config.include Devise::Test::IntegrationHelpers, type: :request
   # If you're not using ActiveRecord, or you'd prefer not to run each of your

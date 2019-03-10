@@ -1,4 +1,5 @@
 class MoviesController < ApplicationController
+  include CommentsHelper
   before_action :authenticate_user!, only: [:send_info]
   before_action :comment_of_current_user, only: [:show]
 
@@ -26,11 +27,11 @@ class MoviesController < ApplicationController
 
 
 
-  def comment_of_current_user
-    if user_signed_in?
-      @movie = Movie.find(params[:id])
-      @comment = @movie.comments.find_by(user_id: current_user.id)
-    end
-  end
-  helper_method :comment_of_current_user
+  # def comment_of_current_user
+  #   if user_signed_in?
+  #     @movie = Movie.find(params[:id])
+  #     @comment = @movie.comments.find_by(user_id: current_user.id)
+  #   end
+  # end
+  # helper_method :comment_of_current_user
 end

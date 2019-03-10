@@ -82,3 +82,15 @@ if Movie.count < 100
     )
   end
 end
+
+Rails.logger.info "Creating comments..."
+
+User.all.each do |user|
+  Movie.all.each do |movie|
+    # If statement limits and randomize number of comments
+    if rand(4)  == 3
+      Comment.create!( body: Faker::Lorem.sentence, user_id: user.id,
+                        movie_id: movie.id )
+    end
+  end
+end

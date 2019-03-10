@@ -11,6 +11,8 @@ gem "jquery-rails"
 gem "sass-rails"
 gem "sqlite3"
 gem "uglifier"
+gem 'simple_form', '~> 4.1'
+gem 'pundit'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.1.0", require: false
@@ -38,4 +40,5 @@ end
 
 group :test do
   gem "shoulda-matchers"
+  gem 'database_cleaner'
 end

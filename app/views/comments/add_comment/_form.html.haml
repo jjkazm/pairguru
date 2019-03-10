@@ -1,0 +1,8 @@
+.panel.panel-default
+  .panel-body
+    %h4 New comment
+    = simple_form_for [@movie, @movie.comments.build], remote: true do |f|
+      = f.error_notification
+      = f.input :body, label: false, input_html: { class: "form-control" },
+          placeholder: "What do you think about #{@movie.title}"
+      = f.button :submit, class: "btn-primary"

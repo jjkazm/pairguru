@@ -12,7 +12,8 @@
 #  updated_at  :datetime
 #
 
-class Movie < ApplicationRecord
-  belongs_to :genre
-  has_many :comments
+require 'rails_helper'
+
+RSpec.describe Movie, type: :model do
+  it { should have_many(:comments) }
 end

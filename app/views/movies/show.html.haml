@@ -3,3 +3,10 @@
   = @movie.description
 - if user_signed_in?
   %p= link_to 'Email me details about this movie', send_info_movie_path(@movie), class: 'btn btn-sm btn-default'
+.well
+  %h1 Comments
+#add_comment
+  = add_comment
+
+.well#comments
+  = render @comments

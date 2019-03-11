@@ -1,1 +1,8 @@
-%h1 Most active users this week
+.row
+  .col-md-6.col-md-offset-3.col-lg-6.col-lg-offset-3
+    %h1.text-center Most active users this week
+    %table.table.table-striped.text-center
+      = render "home/partials/top_user_header"
+      %tbody
+        - @top_users.each_with_index do |user, i|
+          = render partial: "home/partials/top_user", locals:{ user: user, i: i}

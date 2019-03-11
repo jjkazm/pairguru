@@ -1,9 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_movie
   def create
-    @comment = @movie.comments.build(comment_params)
-    @comment.user = current_user
-
+    @comment = NewComment.new(current_user, params).call
     authorize @comment
     if @comment.save
       respond_to do |format|
@@ -25,13 +23,9 @@ class CommentsController < ApplicationController
     @comment.destroy
     flash[:notice] = "Comment has been deleted"
     redirect_to movie_path(@movie)
-
   end
-  private
-    def comment_params
-      params.require(:comment).permit(:body)
-    end
 
+  private
     def set_movie
       @movie = Movie.find(params[:movie_id])
     end

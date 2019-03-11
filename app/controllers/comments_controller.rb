@@ -1,19 +1,20 @@
 class CommentsController < ApplicationController
   before_action :set_movie
   def create
-    @comment = @movie.comments.new(comment_params)
+    @comment = @movie.comments.build(comment_params)
     @comment.user = current_user
+
     authorize @comment
     if @comment.save
       respond_to do |format|
         format.html do
-            flash[:success] = "Comment has been added"
+            flash[:notice] = "Comment has been added"
            redirect_to movie_path(@movie)
         end
-        format.js
+        format.js { flash[:notice] = "Comment has been added" }
       end
     else
-      flash[:danger] = "Comment has NOT been added"
+      flash.now[:danger] = "Comment has NOT been added"
       redirect_to movie_path(@movie)
     end
   end
@@ -22,7 +23,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     authorize @comment
     @comment.destroy
-    flash[:success] = "Comment has been deleted"
+    flash[:notice] = "Comment has been deleted"
     redirect_to movie_path(@movie)
 
   end

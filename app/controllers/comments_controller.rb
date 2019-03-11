@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
         format.js { flash[:notice] = "Comment has been added" }
       end
     else
-      flash.now[:danger] = "Comment has NOT been added"
+      flash[:danger] = "Comment has NOT been added. #{@comment.errors.full_messages.first}"
       redirect_to movie_path(@movie)
     end
   end

@@ -31,7 +31,7 @@ RSpec.feature "Top page" do
     expect(page).to have_content("Most active users this week")
     expect(page).to have_content("#{@best.name}")
     expect(page).not_to have_content("#{@late.name}")
-    expect(page).to have_css("div.top_user")
+    expect(page).to have_selector("div.top_user", count: 10)
   end
 
   scenario "after creating 2 posts user appears on list" do

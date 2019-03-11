@@ -19,6 +19,7 @@ RSpec.feature "Adding comments" do
 
     click_button "Create Comment"
     expect(page).to have_content("This is great")
+    expect(page).to have_content("Comment has been added")
   end
 
   scenario "can't be done for not logged user" do
